@@ -1,10 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.automation.facebook</groupId>
+  <groupId>com.automation.draz</groupId>
   <artifactId>fb-automation</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
-  
+  <properties>
+    <!-- Set the Java version for compiling -->
+    <maven.compiler.source>17</maven.compiler.source>  <!-- Java version you want to use -->
+    <maven.compiler.target>17</maven.compiler.target>  <!-- Java version you want to use -->
+</properties>
   <dependencies>
 	   <dependency>
             <groupId>org.testng</groupId>
@@ -20,7 +24,18 @@
     <artifactId>selenium-java</artifactId>
     <version>4.23.1</version>
 </dependency>
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.24</version> <!-- latest stable version as of now -->
+    <scope>provided</scope>
+</dependency>
 
+<dependency>
+        <groupId>com.googlecode.json-simple</groupId>
+        <artifactId>json-simple</artifactId>
+        <version>1.1.1</version>
+    </dependency>
 
         <!-- Java Faker dependency -->
         <dependency>
@@ -59,12 +74,11 @@
             <artifactId>extentreports</artifactId>
             <version>5.0.1</version>
         </dependency>
-       <dependency>
+        <dependency>
     <groupId>io.github.bonigarcia</groupId>
     <artifactId>webdrivermanager</artifactId>
-    <version>5.3.0</version>
+    <version>5.3.0</version> <!-- Latest version -->
 </dependency>
-
   
         
         <dependency>
@@ -96,9 +110,35 @@
                     <artifactId>testng</artifactId>
                     <version>7.10.1</version>
                 </dependency>
+                <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M5</version>
+        </dependency>
             </dependencies>
         </plugin>
+  
+<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.11.0</version>
+            <configuration>
+                <source>17</source>  <!-- Java version you want to use -->
+                <target>17</target>  <!-- Java version you want to use -->
+            </configuration>
+        </plugin>
+        <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>C:\Users\Kinectro\Desktop\Facebook_Automation\testng.xml</suiteXmlFile> <!-- Path to your TestNG suite -->
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
     </plugins>
+    
 </build>
 
 </project>

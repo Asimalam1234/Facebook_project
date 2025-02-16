@@ -5,16 +5,14 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigReader {
-	private static Properties properties;
+    private static Properties properties = new Properties();
 
     static {
         try {
-            FileInputStream fileInputStream = new FileInputStream("src/main/resources/config/config.properties");
-            properties = new Properties();
-            properties.load(fileInputStream);
+            FileInputStream file = new FileInputStream("C:\\Users\\Kinectro\\Desktop\\Facebook_Automation\\src\\main\\resources\\config\\config.properties");
+            properties.load(file);
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to load config.properties file");
+            throw new RuntimeException("Failed to load config file!", e);
         }
     }
 

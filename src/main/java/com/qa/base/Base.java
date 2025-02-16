@@ -7,7 +7,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import com.qa.factory.DriverFactory;
 import com.qa.utils.ConfigReader;
-import com.qa.utils.ScreenshotUtil;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
@@ -30,9 +29,12 @@ public class Base {
 
         // Initialize the WebDriver from DriverFactory
         String browser = ConfigReader.getProperty("browser");
+
+        
         driver = DriverFactory.initDriver(browser);
+       driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-        driver.get(ConfigReader.getProperty("app.url"));
+        driver.get(ConfigReader.getProperty("orangHrm"));
 
         // Create a new test for each method
         test = extent.createTest(method.getName());
@@ -43,20 +45,14 @@ public class Base {
         // Log test result in ExtentReport
         if (result.getStatus() == ITestResult.FAILURE) {
             test.fail("Test Failed: " + result.getThrowable());
-            
-            // Capture screenshot on failure
-            String screenshotPath = ScreenshotUtil.captureScreenshot(driver, result.getName());
-            if (screenshotPath != null) {
-                test.fail("Screenshot: " + test.addScreenCaptureFromPath(screenshotPath));
-            }
         } else if (result.getStatus() == ITestResult.SUCCESS) {
             test.pass("Test Passed");
         }
 
-        // Quit WebDriver after the test
-        if (driver != null) {
-            driver.quit();
-        }
+//        // Quit WebDriver after the test
+//        if (driver != null) {
+//            driver.quit();
+//        }
 
         // Write the results to the report
         extent.flush();
